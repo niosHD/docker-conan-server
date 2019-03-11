@@ -9,12 +9,12 @@ First create the server container
 $ mkdir conan_server
 $ docker run \
     -p 9300:9300 \
-    -v conan_server:/var/lib/conan \
+    -v `pwd`/conan_server:/var/lib/conan/.conan_server \
     --name conan-server \
     nioshd/conan-server:latest
 ```
 
-The configure the server by editting the `.conan_server/server.conf`
+The configure the server by editing the `.conan_server/server.conf`
 file. The `host_name` and `public_port` parameters are of particular
 importance and must match the name of the docker host and the public
 port exposed for the container. For more information of the server.conf, see
@@ -29,7 +29,7 @@ services:
     image: nioshd/conan-server:latest
     container_name: conan-server
     volumes:
-      - ./conan_server:/var/lib/conan
+      - ./conan_server:/var/lib/conan/.conan_server
     ports:
       - 9300:9300
     restart: always
