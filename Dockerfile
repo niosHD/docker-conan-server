@@ -1,5 +1,5 @@
 FROM python:alpine
-MAINTAINER Christian Günther <cguenther.tu.chemnitz@gmail.com>
+MAINTAINER Mario Werner <mario.werner@iaik.tugraz.at>
 
 # Install dependencies so they get cached with the image
 VOLUME /var/lib/conan

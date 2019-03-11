@@ -6,30 +6,31 @@ Docker image definition for a [Conan.io](https://conan.io) server
 
 First create the server container
 ```bash
-mkdir conan_server
-docker run \
+$ mkdir conan_server
+$ docker run \
     -p 9300:9300 \
     -v conan_server:/var/lib/conan \
-    --name conan_server \
-    cguenther/conan-server:latest
+    --name conan-server \
+    nioshd/conan-server:latest
 ```
 
 The configure the server by editting the `.conan_server/server.conf`
 file. The `host_name` and `public_port` parameters are of particular
 importance and must match the name of the docker host and the public
-port exposed for the container.
-For more information of the server.conf, see the http://conanio.readthedocs.io/en/latest/server.html#server-configuration.
+port exposed for the container. For more information of the server.conf, see
+http://conanio.readthedocs.io/en/latest/server.html#server-configuration.
 
 ## Example docker-compose.yml file
 
 ```
-version: '2' 
+version: '2'
 services:
   conan:
-    image: cguenther/conan-server
-    container_name: conan
+    image: nioshd/conan-server:latest
+    container_name: conan-server
     volumes:
-      - ./conan:/var/lib/conan
+      - ./conan_server:/var/lib/conan
     ports:
       - 9300:9300
+    restart: always
 ```
